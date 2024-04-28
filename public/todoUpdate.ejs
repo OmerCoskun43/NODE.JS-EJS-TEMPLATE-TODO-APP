@@ -1,0 +1,60 @@
+<%- include('_header') -%>
+    <h1>TODO UPDATE</h1>
+    <p>
+        <a class="btn btn-sm btn-secondary" href="/view">List Todos</a>
+    </p>
+    <form action="" method="POST">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>Priority</td>
+                    <td>
+                        <select class="form-select" name="priority">
+                            <% for (let key in PRIORITY) { %>
+
+                                <option value="<%= key  %>" <%=(todo.priority==key ? 'selected' : '' ) %>>
+                                    <%= PRIORITY[key] %>
+                                </option>
+
+                                <% }%>
+
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td><input type="text" name="title" required value="<%= todo.title %>" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>
+                        <textarea name="description" class="form-control"> <%= todo.description%> </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Is Done</td>
+                    <td>
+                        <select name="isDone" class="form-select">
+
+                            <option value="1" <%=( todo.isDone ? 'selected' : '' ) %> >Yes</option>
+                            <option value="0" <%=( !todo.isDone ? 'selected' : '' ) %> >No</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Created</td>
+                    <td>
+                        <%= todo.createdAt.toUTCString().replace('GMT', '' ) %>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <p>
+            <button class="btn btn-primary" type="submit">CREATE</button>
+        </p>
+    </form>
+    <%- include('_footer') -%>
